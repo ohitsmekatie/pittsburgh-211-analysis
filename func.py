@@ -53,3 +53,4 @@ def show_age_counts(dataframe):
                           
     ax.set_xlabel("Age Range")
     ax.set_ylabel("Num. Requests")
+    
