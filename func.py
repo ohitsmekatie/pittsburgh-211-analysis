@@ -1,5 +1,7 @@
 import matplotlib.pyplot as plt
 
+## ALL ALLEGHENY FUNCTIONS 
+
 def counts_by_year(dataframe):
     string_dates = dataframe["contact_date"].astype(str)
     num_2021 = 0
@@ -53,7 +55,7 @@ def top_10_chart(dataframe):
     fig = plt.figure()
     plt.bar(categories, top_10_request_counts, color = "plum")
     plt.title("Top 10 requests", fontsize=40)
-    plt.xticks(categories,fontsize=20)
+    plt.xticks(categories,fontsize=40,rotation ='vertical')
     plt.yticks(fontsize=20)
     fig.set_figheight(40)
     fig.set_figwidth(70)
@@ -89,7 +91,7 @@ def show_zipcode_counts(dataframe):
     fig = plt.figure()
 
     plt.bar(zipcodes, zipcode_counts, color = "rosybrown")
-    plt.xticks = (zipcodes)
+    plt.xticks(zipcodes)
     plt.title("Count of requests by zipcode", fontsize=20)
     fig.set_figheight(10)
     fig.set_figwidth(20)
@@ -99,16 +101,65 @@ def show_zipcode_counts(dataframe):
 def show_age_counts(dataframe):
     age_counts = dataframe.groupby("age_range")["contact_date"].count()
     age_counts.sort_values(inplace = True, ascending = True)
-    age_ranges = ["45 to 64", "25 to 44", "65 and over", "18 to 24", "6 to 17", "5 and under"]
+    # age_ranges = ["45 to 64", "25 to 44", "65 and over", "18 to 24", "6 to 17", "5 and under"]
+    age_ranges = age_counts.index
     
     fig = plt.figure()
     
     plt.barh(age_ranges, age_counts, color = "olivedrab")
-    # plt.xticks(age_ranges)
     plt.title("Count of requests by age", fontsize=20)
     fig.set_figheight(10)
     fig.set_figwidth(20)
     plt.show()
+    
+    
+    
+### NEEDS NOT MET FUNCTIONS 
+
+def counts_by_year_not_met(dataframe):
+    string_dates = dataframe["contact_date"].astype(str)
+    num_2021 = 0
+    num_2020 = 0 
+
+    for date in string_dates:
+        if date.startswith('2020'):
+            num_2020 += 1 
+        elif date.startswith('2021'):
+            num_2021 += 1 
+        else:
+            other +=1
+
+    years = [2020, 2021]
+    request_not_met_list = [2279, 664]
+
+    
+    fig = plt.figure() 
+    plt.bar(years,request_not_met_list, color="darkcyan")
+    plt.xlabel("year")
+    plt.title("Count of requests by year", fontsize=14)
+    plt.xticks(years)
+    fig.set_figheight(10)
+    fig.set_figwidth(10)
+    plt.show()
+    
+
+def top_10_chart_not_met(dataframe):
+    category_counts = dataframe.groupby("needs_category")["contact_date"].count()
+    category_counts.sort_values(inplace = True, ascending = False)
+    top_10_request_counts = category_counts[:10]
+    categories = list(top_10_request_counts.index)
+
+
+    fig = plt.figure()
+    plt.bar(categories, top_10_request_counts, color = "plum")
+    plt.title("Top 10 requests of needs not met", fontsize=60)
+    plt.xticks(categories,fontsize=40,rotation="vertical")
+    plt.yticks(fontsize=40)
+    fig.set_figheight(40)
+    fig.set_figwidth(70)
+    plt.show()
+
+
     
 #     ax = age_counts.plot(kind="barh", 
 #                            color="thistle", 
